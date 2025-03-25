@@ -5,17 +5,17 @@ spring:
   application:
     name: api-gateway
   cloud:
-    gateway:
-      routes:
-        - id: auth-service
-          predicates:
-            - Path=/api/auth/**
-          uri: lb://auth-service:8081
 #    gateway:
-#      discovery:
-#        locator:
-#          enabled: true
-#          lower-case-service-id: true
+#      routes:
+#        - id: auth-service
+#          predicates:
+#            - Path=/api/auth/**
+#          uri: lb://auth-service:8081
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
 
 eureka:
   client:
@@ -26,8 +26,8 @@ eureka:
   instance:
     prefer-ip-address: true
 
-#jwt:
-#  secret: ThisIsAVerySecureSecretKeyForJWTSigningInOurWalletTransferSystem
+jwt:
+  secret: ThisIsAVerySecureSecretKeyForJWTSigningInOurWalletTransferSystem
 
 management:
   endpoints:
