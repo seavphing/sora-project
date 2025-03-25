@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="2" author="developer">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM auth_schema.users WHERE username = 'testuser'
+            </sqlCheck>
+        </preConditions>
+        <!-- Add a test user (password is 'password' BCrypt hashed) -->
+        <insert tableName="users">
+            <column name="username" value="testuser"/>
+            <column name="password" value="$2a$10$IfnKG.Cu9WGvjbv1MfbQr.dMYMfloaqcKdUqFf4MO2HhV/EV5sQF2"/>
+            <column name="email" value="test@example.com"/>
+            <column name="first_name" value="Test"/>
+            <column name="last_name" value="User"/>
+            <column name="default_currency" value="USD"/>
+        </insert>
+
+        <!-- Add an admin user (password is 'admin123' BCrypt hashed) -->
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="password" value="$2a$10$VBbfsaNJH84MEKZUu5xV5eA7MF5Bl2kXHkpJUxwRSQvSHJ2G5STEC"/>
+            <column name="email" value="admin@example.com"/>
+            <column name="first_name" value="Admin"/>
+            <column name="last_name" value="User"/>
+            <column name="default_currency" value="USD"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
