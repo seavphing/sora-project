@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="2" author="developer">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM gift_codes
+                WHERE code = 'WELCOME50'
+            </sqlCheck>
+        </preConditions>
+        <!-- Add a sample gift code -->
+        <insert tableName="gift_codes">
+            <column name="code" value="WELCOME50"/>
+            <column name="amount" value="50.00"/>
+            <column name="currency_code" value="USD"/>
+            <column name="redeemed" value="false"/>
+            <column name="created_by_user_id" value="1"/>
+            <column name="expires_at" valueDate="2025-12-31T23:59:59"/>
+            <column name="version" value="0"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

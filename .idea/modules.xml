@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/Fund_Transfer-System.iml" filepath="$PROJECT_DIR$/.idea/Fund_Transfer-System.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/api-gateway.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gift-code-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/gift-code-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/wallet-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/wallet-service.main.iml" />
     </modules>
   </component>

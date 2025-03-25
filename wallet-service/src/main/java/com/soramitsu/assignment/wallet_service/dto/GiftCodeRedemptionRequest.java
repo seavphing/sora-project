@@ -20,4 +20,7 @@ public class GiftCodeRedemptionRequest {
 
     @NotBlank(message = "Gift code is required")
     private String giftCode;
+
+    @NotNull(message = "User ID is required")
+    private Long userId;
 }

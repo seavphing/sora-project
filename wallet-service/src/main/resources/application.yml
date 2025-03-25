@@ -52,3 +52,5 @@ rabbitmq:
   routing-key:
     transaction-created: wallet.transaction.created
     user-created: wallet.user.created
+jwt:
+  secret: ThisIsAVerySecureSecretKeyForJWTSigningInOurWalletTransferSystem

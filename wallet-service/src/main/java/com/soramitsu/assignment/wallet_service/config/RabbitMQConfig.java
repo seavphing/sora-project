@@ -103,7 +103,7 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public ObjectMapper objectMapper() {
+    public ObjectMapper rabbitObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         return objectMapper;

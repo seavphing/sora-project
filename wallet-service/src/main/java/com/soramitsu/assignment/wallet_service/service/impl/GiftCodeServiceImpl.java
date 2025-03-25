@@ -1,6 +1,8 @@
 package com.soramitsu.assignment.wallet_service.service.impl;
 
 import com.soramitsu.assignment.wallet_service.dto.GiftCodeRedemptionRequest;
+import com.soramitsu.assignment.wallet_service.dto.GiftCodeResponse;
+import com.soramitsu.assignment.wallet_service.dto.WalletResponse;
 import com.soramitsu.assignment.wallet_service.exception.InvalidGiftCodeException;
 import com.soramitsu.assignment.wallet_service.exception.ResourceNotFoundException;
 import com.soramitsu.assignment.wallet_service.service.GiftCodeService;
@@ -24,7 +26,7 @@ public class GiftCodeServiceImpl implements GiftCodeService {
 
     public GiftCodeServiceImpl(WalletService walletService,
                                RestTemplate restTemplate,
-                               @Value("${gift-code-service.url:http://gift-code-service}") String giftCodeServiceUrl) {
+                               @Value("${gift-code-service.url:http://localhost:8080/api/v1/gift-codes}") String giftCodeServiceUrl) {
         this.walletService = walletService;
         this.restTemplate = restTemplate;
         this.giftCodeServiceUrl = giftCodeServiceUrl;
@@ -36,34 +38,31 @@ public class GiftCodeServiceImpl implements GiftCodeService {
 
         try {
             // Verify wallet exists
-            walletService.getWalletById(request.getWalletId());
+            WalletResponse wallet = walletService.getWalletById(request.getWalletId());
 
             // Call gift code service to validate and redeem the code
             String url = giftCodeServiceUrl + "/redeem/" + request.getGiftCode();
 
-            // In a real implementation, we would call the gift code service
-            // Map<String, Object> response = restTemplate.postForObject(
-            //     url,
-            //     Map.of("walletId", request.getWalletId()),
-            //     Map.class
-            // );
+            // Make the API call with proper type
+            GiftCodeResponse response = restTemplate.postForObject(
+                    url,
+                    Map.of("userId", request.getUserId(),
+                            "walletId", request.getWalletId()),
+                    GiftCodeResponse.class
+            );
 
-            // For demo, we'll simulate a successful response
-            Map<String, Object> giftCodeDetails = simulateGiftCodeResponse(request.getGiftCode());
-
-            if (giftCodeDetails == null || (boolean) giftCodeDetails.get("redeemed")) {
+            if (response == null || !response.isRedeemed()) {
                 log.error("Gift code {} is invalid or already redeemed", request.getGiftCode());
                 throw new InvalidGiftCodeException("Gift code is invalid or already redeemed");
             }
 
-            BigDecimal amount = new BigDecimal(giftCodeDetails.get("amount").toString());
-            String currencyCode = (String) giftCodeDetails.get("currencyCode");
+            System.out.println("The amount is: " + response.getAmount());
 
             // Add funds to wallet
             walletService.addFunds(
                     request.getWalletId(),
-                    amount,
-                    currencyCode,
+                    response.getAmount(),
+                    response.getCurrencyCode(),
                     "GIFT_CODE",
                     request.getGiftCode()
             );

@@ -32,7 +32,7 @@ public class WalletServiceImpl implements WalletService {
     private final TransactionEventPublisher transactionEventPublisher;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     public WalletResponse createWallet(CreateWalletRequest request) {
         log.info("Creating wallet for user ID: {} with currency: {}", request.getUserId(), request.getCurrencyCode());
 
@@ -58,6 +58,7 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
+    @Transactional
     @Cacheable(value = "walletsByUser", key = "#userId")
     public List<WalletResponse> getWalletsByUserId(Long userId) {
         log.info("Getting wallets for user ID: {}", userId);
@@ -69,6 +70,7 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
+    @Transactional
     @Cacheable(value = "wallets", key = "#id")
     public WalletResponse getWalletById(UUID id) {
         log.info("Getting wallet by ID: {}", id);
@@ -82,7 +84,7 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     @CacheEvict(value = {"wallets", "walletsByUser"}, allEntries = true)
     public void transferFunds(TransferRequest request) {
         log.info("Transferring {} from wallet ID: {} to wallet ID: {}",
@@ -146,7 +148,7 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     @CacheEvict(value = {"wallets", "walletsByUser"}, allEntries = true)
     public void addFunds(UUID walletId, BigDecimal amount, String currencyCode, String source, String reference) {
         log.info("Adding {} {} to wallet ID: {} from source: {}", amount, currencyCode, walletId, source);

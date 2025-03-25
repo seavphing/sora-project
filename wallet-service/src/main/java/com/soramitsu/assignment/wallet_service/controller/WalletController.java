@@ -4,8 +4,10 @@ import com.soramitsu.assignment.wallet_service.dto.CreateWalletRequest;
 import com.soramitsu.assignment.wallet_service.dto.GiftCodeRedemptionRequest;
 import com.soramitsu.assignment.wallet_service.dto.TransferRequest;
 import com.soramitsu.assignment.wallet_service.dto.WalletResponse;
+import com.soramitsu.assignment.wallet_service.exception.UnauthorizedException;
 import com.soramitsu.assignment.wallet_service.service.GiftCodeService;
 import com.soramitsu.assignment.wallet_service.service.WalletService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +36,15 @@ public class WalletController {
      * @return Created wallet
      */
     @PostMapping("/create")
-    public ResponseEntity<WalletResponse> createWallet(@Valid @RequestBody CreateWalletRequest request) {
+    public ResponseEntity<WalletResponse> createWallet(@Valid @RequestBody CreateWalletRequest request, HttpServletRequest httpRequest) {
+
+        Long authenticatedUserId = (Long) httpRequest.getAttribute("userId");
+
+        if (!authenticatedUserId.equals(request.getUserId())) {
+            log.warn("User ID mismatch. Token user ID: {}, Request user ID: {}",
+                    authenticatedUserId, request.getUserId());
+            throw new UnauthorizedException("You can only create wallets for your own user ID");
+        }
         log.info("Received request to create wallet for user ID: {}", request.getUserId());
         WalletResponse wallet = walletService.createWallet(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(wallet);
