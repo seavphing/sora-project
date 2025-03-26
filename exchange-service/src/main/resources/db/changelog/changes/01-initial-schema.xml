@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="1" author="developer">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="exchange_rates" schemaName="exchange_rate_schema"/>
+            </not>
+        </preConditions>
+        <createTable tableName="exchange_rates">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="source_currency" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="target_currency" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rate" type="DECIMAL(19, 8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint
+                tableName="exchange_rates"
+                columnNames="source_currency, target_currency"
+                constraintName="uk_exchange_rates_currencies"/>
+
+        <createIndex indexName="idx_exchange_rates_currencies" tableName="exchange_rates">
+            <column name="source_currency"/>
+            <column name="target_currency"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

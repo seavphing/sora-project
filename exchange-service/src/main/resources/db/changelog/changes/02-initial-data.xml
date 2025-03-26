@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="2" author="developer">
+
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM exchange_rates
+                WHERE source_currency = 'USD' AND target_currency = 'EUR'
+            </sqlCheck>
+        </preConditions>
+
+        <!-- Insert initial exchange rates -->
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="USD"/>
+            <column name="target_currency" value="EUR"/>
+            <column name="rate" value="0.92"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="USD"/>
+            <column name="target_currency" value="GBP"/>
+            <column name="rate" value="0.79"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="USD"/>
+            <column name="target_currency" value="JPY"/>
+            <column name="rate" value="151.50"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="USD"/>
+            <column name="target_currency" value="AUD"/>
+            <column name="rate" value="1.52"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="USD"/>
+            <column name="target_currency" value="CAD"/>
+            <column name="rate" value="1.37"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="USD"/>
+            <column name="target_currency" value="CHF"/>
+            <column name="rate" value="0.90"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="USD"/>
+            <column name="target_currency" value="CNY"/>
+            <column name="rate" value="7.20"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="EUR"/>
+            <column name="target_currency" value="USD"/>
+            <column name="rate" value="1.09"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="GBP"/>
+            <column name="target_currency" value="USD"/>
+            <column name="rate" value="1.27"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="JPY"/>
+            <column name="target_currency" value="USD"/>
+            <column name="rate" value="0.0066"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="AUD"/>
+            <column name="target_currency" value="USD"/>
+            <column name="rate" value="0.66"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="CAD"/>
+            <column name="target_currency" value="USD"/>
+            <column name="rate" value="0.73"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="CHF"/>
+            <column name="target_currency" value="USD"/>
+            <column name="rate" value="1.11"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="CNY"/>
+            <column name="target_currency" value="USD"/>
+            <column name="rate" value="0.14"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="EUR"/>
+            <column name="target_currency" value="GBP"/>
+            <column name="rate" value="0.86"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="GBP"/>
+            <column name="target_currency" value="EUR"/>
+            <column name="rate" value="1.16"/>
+        </insert>
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="USD"/>
+            <column name="target_currency" value="KHR"/>
+            <column name="rate" value="4100.00"/>
+        </insert>
+
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="KHR"/>
+            <column name="target_currency" value="USD"/>
+            <column name="rate" value="0.00024"/>
+        </insert>
+
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="EUR"/>
+            <column name="target_currency" value="KHR"/>
+            <column name="rate" value="4472.00"/>
+        </insert>
+
+        <insert tableName="exchange_rates">
+            <column name="source_currency" value="KHR"/>
+            <column name="target_currency" value="EUR"/>
+            <column name="rate" value="0.00022"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

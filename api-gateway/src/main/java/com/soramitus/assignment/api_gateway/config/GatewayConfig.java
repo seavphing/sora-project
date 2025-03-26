@@ -28,7 +28,7 @@ public class GatewayConfig {
                         .filters(f -> f.rewritePath("/api/transactions/(?<segment>.*)", "/${segment}"))
                         .uri("lb://transaction-service"))
                 .route("exchange-rate-service", r -> r.path("/api/v1/exchange-rates/**")
-                        .filters(f -> f.rewritePath("/api/v1/exchange-rates/(?<segment>.*)", "/${segment}"))
+                        .filters(f -> f.rewritePath("/api/exchange-rates/(?<segment>.*)", "/${segment}"))
                         .uri("lb://exchange-rate-service"))
                 .build();
 

@@ -1,9 +1,9 @@
 server:
-  port: 8081
+  port: 8085
 
 spring:
   application:
-    name: auth-service
+    name: exchange-rate-service
   datasource:
     url: jdbc:postgresql://localhost:5432/wallet_system
     username: postgres
@@ -20,16 +20,10 @@ spring:
   redis:
     host: localhost
     port: 6379
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
-    default-schema: auth_schema
-    contexts: update
+    default-schema: exchange_rate_schema
 
 eureka:
   client:
@@ -39,22 +33,3 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
-
-jwt:
-  secret: ThisIsAVerySecureSecretKeyForJWTSigningInOurWalletTransferSystem
-  expiration: 86400000  # 24 hours
-
-rabbitmq:
-  exchange:
-    user: wallet.user.exchange
-  queue:
-    user-created: wallet.user.created.queue
-  routing-key:
-    user-created: wallet.user.created
-
-logging:
-  level:
-    root: INFO
-    com.soramitsu.assignment.auth_server: DEBUG
-    org.springframework.web: INFO
-    org.hibernate: INFO

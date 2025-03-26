@@ -35,7 +35,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     }
 
     public ExchangeRateServiceImpl(RestTemplate restTemplate,
-                                   @Value("${exchange-rate-service.url:http://exchange-rate-service}") String exchangeRateServiceUrl) {
+                                   @Value("${exchange-rate-service.url:http://localhost:8085/api/v1/}") String exchangeRateServiceUrl) {
         this.restTemplate = restTemplate;
         this.exchangeRateServiceUrl = exchangeRateServiceUrl;
     }
@@ -54,11 +54,11 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
             // Try to get from exchange rate service
             String url = exchangeRateServiceUrl + "/rate?source=" + sourceCurrency + "&target=" + targetCurrency;
             // In a real implementation, we would call the exchange rate service
-            // ExchangeRateResponse response = restTemplate.getForObject(url, ExchangeRateResponse.class);
-            // return response.getRate();
+             ExchangeRateResponse response = restTemplate.getForObject(url, ExchangeRateResponse.class);
+             return response.getRate();
 
             // For demo, we'll use fallback rates
-            return getFallbackRate(sourceCurrency, targetCurrency);
+//            return getFallbackRate(sourceCurrency, targetCurrency);
         } catch (Exception e) {
             log.warn("Error getting exchange rate from service, using fallback rates", e);
             // Fallback to local rates if service is unavailable
