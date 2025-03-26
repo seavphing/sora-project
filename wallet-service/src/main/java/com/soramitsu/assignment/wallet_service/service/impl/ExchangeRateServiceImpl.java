@@ -36,7 +36,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     }
 
     public ExchangeRateServiceImpl(RestTemplate restTemplate,
-                                   @Value("${exchange-rate-service.url:http://localhost:8085/api/v1/exchange-rates}") String exchangeRateServiceUrl) {
+                                   @Value("${exchange-rate-service.url:http://api-gateway:8080/api/v1/exchange-rates}") String exchangeRateServiceUrl) {
         this.restTemplate = restTemplate;
         this.exchangeRateServiceUrl = exchangeRateServiceUrl;
     }

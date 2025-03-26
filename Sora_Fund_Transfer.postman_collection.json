@@ -1,0 +1,422 @@
+{
+	"info": {
+		"_postman_id": "1e58cbc0-5054-4275-856d-10c5672d29dc",
+		"name": "Sora_Fund_Transfer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23397093",
+		"_collection_link": "https://sdf666-5427.postman.co/workspace/Escape-Plan~7be53bf8-36d0-4f0e-82c2-3837988de599/collection/23397093-1e58cbc0-5054-4275-856d-10c5672d29dc?action=share&source=collection_link&creator=23397093"
+	},
+	"item": [
+		{
+			"name": "Auth-service",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"testuser\",\n    \"password\" : \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth-service/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth-service",
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"dara\",\n    \"password\" : \"1234567\",\n    \"email\" : \"dara@gmail.com\",\n    \"firstName\" : \"Dara\",\n    \"lastName\" : \"Kok\",\n    \"defaultCurrency\" : \"USD\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validate-token",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "wallet",
+			"item": [
+				{
+					"name": "Get-all-wallets-for-a-user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6ImRhcmEiLCJzdWIiOiI4IiwiaWF0IjoxNzQyOTEwNTgyLCJleHAiOjE3NDI5OTY5ODJ9.X1gQJMOf2d7j21G2-BDkZp634N0SY-vN0n_XKI_cqdIHKKg2sGPGcnHascBxUZDupnLQ6xGHRBPbkE8M38kQWA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/wallets/user/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"user",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-wallet-with-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6ImRhcmEiLCJzdWIiOiI4IiwiaWF0IjoxNzQyOTEwNTgyLCJleHAiOjE3NDI5OTY5ODJ9.X1gQJMOf2d7j21G2-BDkZp634N0SY-vN0n_XKI_cqdIHKKg2sGPGcnHascBxUZDupnLQ6xGHRBPbkE8M38kQWA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/wallets/fe6607ae-842d-4934-872e-9dd06233bc5f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"fe6607ae-842d-4934-872e-9dd06233bc5f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6ImRhcmEiLCJzdWIiOiI4IiwiaWF0IjoxNzQyOTEwNTgyLCJleHAiOjE3NDI5OTY5ODJ9.X1gQJMOf2d7j21G2-BDkZp634N0SY-vN0n_XKI_cqdIHKKg2sGPGcnHascBxUZDupnLQ6xGHRBPbkE8M38kQWA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\" : 8,\n    \"currencyCode\" : \"EUR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/wallets/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "redeem-gift-code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6ImRhcmEiLCJzdWIiOiI4IiwiaWF0IjoxNzQyOTEwNTgyLCJleHAiOjE3NDI5OTY5ODJ9.X1gQJMOf2d7j21G2-BDkZp634N0SY-vN0n_XKI_cqdIHKKg2sGPGcnHascBxUZDupnLQ6xGHRBPbkE8M38kQWA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"walletId\" : \"fe6607ae-842d-4934-872e-9dd06233bc5f\",\n    \"giftCode\" : \"giftCode\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/wallets/redeem-gift-code",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"redeem-gift-code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transfer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/wallets/transfer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "gift-code",
+			"item": [
+				{
+					"name": "get-gift-code",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "create-by",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "redeem",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\" : 7,\n    \"walletId\" : \"fe6607ae-842d-4934-872e-9dd06233bc5f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/gift-codes/redeem/WELCOME50",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"gift-codes",
+								"redeem",
+								"WELCOME50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-giftcode",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\" : 100.00,\n    \"currencyCode\" : \"USD\",\n    \"userId\" : 2,\n    \"validityDays\" : 365\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/gift-codes/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"gift-codes",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transaction-service",
+			"item": [
+				{
+					"name": "get-transaction-on-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/transactions/f47ac10b-58cc-4372-a567-0e02b2c3d479",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"f47ac10b-58cc-4372-a567-0e02b2c3d479"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "export-csv",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "export-excel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/transactions/export/excel/user/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"export",
+								"excel",
+								"user",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "exchange-service",
+			"item": [
+				{
+					"name": "/rate",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

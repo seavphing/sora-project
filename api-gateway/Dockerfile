@@ -1,9 +1,11 @@
-FROM gradle:7.6-jdk17-alpine AS build
-WORKDIR /app
-COPY . .
-RUN gradle build -x test
+FROM gradle:8-jdk17
 
-FROM eclipse-temurin:17-jre-alpine
+EXPOSE 8080
+
 WORKDIR /app
-COPY --from=build /app/build/libs/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+COPY . .
+
+RUN gradle assemble
+
+ENTRYPOINT ["java", "-jar","./build/libs/api-gateway-0.0.1-SNAPSHOT.jar"]

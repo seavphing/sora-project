@@ -59,7 +59,7 @@ configure<org.liquibase.gradle.LiquibaseExtension> {
 	activities.register("main") {
 		this.arguments = mapOf(
 			"changeLogFile" to "src/main/resources/db/changelog/db.changelog-master.xml",
-			"url" to (project.findProperty("dbUrl") as? String ?: "jdbc:postgresql://localhost:5432/wallet_system"),
+			"url" to (project.findProperty("dbUrl") as? String ?: "jdbc:postgresql://postgres:5432/wallet_system"),
 			"username" to (project.findProperty("dbUsername") as? String ?: "postgres"),
 			"password" to (project.findProperty("dbPassword") as? String ?: "root"),
 			"defaultSchemaName" to (project.findProperty("dbSchema") as? String ?: "wallet_schema")

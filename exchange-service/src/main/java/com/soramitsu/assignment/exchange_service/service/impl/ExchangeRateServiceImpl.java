@@ -23,7 +23,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     private final ExchangeRateRepository exchangeRateRepository;
 
     @Override
-    @Cacheable(value = "exchangeRates", key = "#sourceCurrency + '_' + #targetCurrency")
+//    @Cacheable(value = "exchangeRates", key = "#sourceCurrency + '_' + #targetCurrency")
     public ExchangeRateDto getExchangeRate(String sourceCurrency, String targetCurrency) {
         // If source and target are the same, return 1.0 exchange rate
         if (sourceCurrency.equalsIgnoreCase(targetCurrency)) {
@@ -51,7 +51,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 
     @Override
     @Transactional
-    @CacheEvict(value = "exchangeRates", key = "#request.sourceCurrency + '_' + #request.targetCurrency")
+//    @CacheEvict(value = "exchangeRates", key = "#request.sourceCurrency + '_' + #request.targetCurrency")
     public ExchangeRateDto createOrUpdateExchangeRate(ExchangeRateRequest request) {
         ExchangeRate exchangeRate;
 
@@ -88,7 +88,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 
     @Override
     @Transactional
-    @CacheEvict(value = "exchangeRates", allEntries = true)
+//    @CacheEvict(value = "exchangeRates", allEntries = true)
     public void seedDefaultExchangeRates() {
         // Only seed if no exchange rates exist
         if (exchangeRateRepository.count() == 0) {

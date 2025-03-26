@@ -26,7 +26,7 @@ public class GiftCodeServiceImpl implements GiftCodeService {
 
     public GiftCodeServiceImpl(WalletService walletService,
                                RestTemplate restTemplate,
-                               @Value("${gift-code-service.url:http://localhost:8080/api/v1/gift-codes}") String giftCodeServiceUrl) {
+                               @Value("${gift-code-service.url:http://api-gateway:8080/api/v1/gift-codes}") String giftCodeServiceUrl) {
         this.walletService = walletService;
         this.restTemplate = restTemplate;
         this.giftCodeServiceUrl = giftCodeServiceUrl;

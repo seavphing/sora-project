@@ -65,7 +65,7 @@ public class GiftCodeServiceImpl implements GiftCodeService {
 
     @Override
     @Transactional
-    @Cacheable(value = "giftCodes", key = "#code")
+//    @Cacheable(value = "giftCodes", key = "#code")
     public GiftCodeDto getGiftCode(String code) {
         GiftCode giftCode = giftCodeRepository.findByCode(code)
                 .orElseThrow(() -> new ResourceNotFoundException("Gift code not found"));
@@ -75,7 +75,7 @@ public class GiftCodeServiceImpl implements GiftCodeService {
 
     @Override
     @Transactional
-    @CacheEvict(value = "giftCodes", key = "#code")
+//    @CacheEvict(value = "giftCodes", key = "#code")
     public GiftCodeDto redeemGiftCode(String code, RedeemGiftCodeRequest request) {
         GiftCode giftCode = giftCodeRepository.findByCode(code)
                 .orElseThrow(() -> new ResourceNotFoundException("Gift code not found"));

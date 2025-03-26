@@ -3,7 +3,7 @@ spring:
   application:
     name: wallet-service
   datasource:
-    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/wallet_system}
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://postgres:5432/wallet_system}
     username: ${JDBC_DATABASE_USERNAME:postgres}
     password: ${JDBC_DATABASE_PASSWORD:root}
     driver-class-name: org.postgresql.Driver
@@ -21,10 +21,10 @@ spring:
     change-log: classpath:db/changelog/db.changelog-master.xml
     default-schema: wallet_schema
   redis:
-    host: ${REDIS_HOST:localhost}
+    host: ${REDIS_HOST:redis}
     port: ${REDIS_PORT:6379}
   rabbitmq:
-    host: ${RABBITMQ_HOST:localhost}
+    host: ${RABBITMQ_HOST:rabbitmq}
     port: ${RABBITMQ_PORT:5672}
     username: ${RABBITMQ_USERNAME:guest}
     password: ${RABBITMQ_PASSWORD:guest}
@@ -35,7 +35,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_DEFAULT_ZONE:http://localhost:8761/eureka/}
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://eureka-server:8761/eureka/}
     register-with-eureka: true
     fetch-registry: true
   instance:
