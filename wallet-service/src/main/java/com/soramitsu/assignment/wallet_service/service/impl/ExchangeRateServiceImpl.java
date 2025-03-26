@@ -1,5 +1,6 @@
 package com.soramitsu.assignment.wallet_service.service.impl;
 
+import com.soramitsu.assignment.wallet_service.dto.ExchangeRateResponse;
 import com.soramitsu.assignment.wallet_service.service.ExchangeRateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +36,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     }
 
     public ExchangeRateServiceImpl(RestTemplate restTemplate,
-                                   @Value("${exchange-rate-service.url:http://localhost:8085/api/v1/}") String exchangeRateServiceUrl) {
+                                   @Value("${exchange-rate-service.url:http://localhost:8085/api/v1/exchange-rates}") String exchangeRateServiceUrl) {
         this.restTemplate = restTemplate;
         this.exchangeRateServiceUrl = exchangeRateServiceUrl;
     }
