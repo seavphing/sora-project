@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="2" author="developer">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM transactions
+                WHERE id = 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+            </sqlCheck>
+        </preConditions>
+        <!-- Add a sample transaction (system deposit to initial wallet) -->
+        <insert tableName="transactions">
+            <column name="id" value="f47ac10b-58cc-4372-a567-0e02b2c3d479"/>
+            <column name="receiver_id" value="1"/>
+            <column name="receiver_wallet_id" value="550e8400-e29b-41d4-a716-446655440000"/>
+            <column name="amount" value="1000.00"/>
+            <column name="currency_code" value="USD"/>
+            <column name="status" value="COMPLETED"/>
+            <column name="type" value="SYSTEM_DEPOSIT"/>
+            <column name="description" value="Initial wallet funding"/>
+            <column name="created_at" valueDate="2023-01-01T12:00:00"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

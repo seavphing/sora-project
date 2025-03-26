@@ -1,0 +1,48 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: transaction-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/wallet_system
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  redis:
+    host: redis
+    port: 6379
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    default-schema: transaction_schema
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+rabbitmq:
+  exchange:
+    transactions: wallet.transaction.exchange
+  queue:
+    transactions: wallet.transaction.queue
+  routing-key:
+    transaction-created: wallet.transaction.created
